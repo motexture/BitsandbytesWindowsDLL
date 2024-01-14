@@ -1,4 +1,4 @@
-# bitsandbytes-windows-dll
+# BitsandbytesWindowsDLL
 
 ## Overview
 This repository provides CUDA 11.8 compiled DLLs for `bitsandbytes`, offering a fix for recent versions that caused issues during runtime. Special thanks to [emojiiii](https://github.com/emojiiii/) for the DLL files!
