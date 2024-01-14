@@ -31,11 +31,11 @@ from .env_vars import get_potentially_lib_path_containing_env_vars
 # libcudart.so is missing by default for a conda install with PyTorch 2.0 and instead
 # we have libcudart.so.11.0 which causes a lot of errors before
 # not sure if libcudart.so.12.0 exists in pytorch installs, but it does not hurt
-CUDA_RUNTIME_LIBS: list = ["C:\\Users\\motex\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\bitsandbytes\\libbitsandbytes_cuda118.so"]
+CUDA_RUNTIME_LIBS: list = ["libbitsandbytes_cuda118.dll"]
 
 # this is a order list of backup paths to search CUDA in, if it cannot be found in the main environmental paths
 backup_paths = []
-backup_paths.append('C:\\Users\\motex\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\bitsandbytes\\libbitsandbytes_cuda118.so')
+backup_paths.append('libbitsandbytes_cuda118.dll')
 
 class CUDASetup:
     _instance = None
@@ -323,7 +323,6 @@ def get_compute_capabilities():
 
     return ccs
 
-
 def evaluate_cuda_setup():
     cuda_setup = CUDASetup.get_instance()
     if 'BITSANDBYTES_NOWELCOME' not in os.environ or str(os.environ['BITSANDBYTES_NOWELCOME']) == '0':
@@ -334,7 +333,7 @@ def evaluate_cuda_setup():
         cuda_setup.add_log_entry('='*80)
     if not torch.cuda.is_available(): return 'libbitsandbytes_cuda118.dll', None, None, None
 
-    cudart_path = "C:\\Users\\motex\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\bitsandbytes\\libbitsandbytes_cuda118.so"
+    cudart_path = "libbitsandbytes_cuda118.so"
     ccs = get_compute_capabilities()
     ccs.sort()
     cc = ccs[-1] # we take the highest capability
